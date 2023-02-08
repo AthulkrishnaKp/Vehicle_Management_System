@@ -1,0 +1,26 @@
+{%extends 'base.html'%}
+{%block body_block%}
+
+    <div class="container mt-3">
+        
+        <div class="row">
+            <div class="col-2"></div>
+            <div class="col-8">
+                <div class="card">
+                    <div class="card-body">
+                        <h3 style="text-decoration: none;" class="text-center mt-3 mb-4">Edit Vehicle Details Here</h3>
+                        <form action="" method="POST">
+                            {%csrf_token%}
+                            {{form.as_p}}
+                            <div class="text-center">
+                                <input class="btn btn-primary btn-sm mt-2 mb-3" type="submit" value="Submit">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-2"></div>
+        </div>
+    </div>
+
+{%endblock%}

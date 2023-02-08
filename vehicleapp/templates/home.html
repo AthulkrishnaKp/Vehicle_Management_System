@@ -1,0 +1,81 @@
+{%extends 'base.html'%}
+{%block body_block%}
+
+<div class="container mt-4">
+    <h2 class="text-center mb-3">Vehicle Management System</h2>
+    {%if request.user.role == 1%}
+    <form action="" method="POST" >
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-2"></div>
+                <div class="col-lg-8 mb-4">
+                    <p class="text-center">
+                        <button class="btn btn-success" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                            Add New Vehicle Detail
+                        </button>    
+                    </p>
+                    <div class="collapse" id="collapseExample">
+                        <div class="card card-body">
+                            <div class="mt-4" style="margin-left: 20px;margin-right: 20px;" >
+                                {%csrf_token%}
+                                {{form.as_p}}
+                            </div>
+                            <div class="text-center mt-4">
+                                <input class="btn btn-info" type="submit" value="Submit">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2"></div>
+            </div>
+        </div>
+    </form>
+    {%endif%}
+    {%if request.user.role == 3%}
+    <br>
+    {%endif%}
+    </div>
+    <div class="container">
+        <div class="row mb-5 text-center">
+            <div class="col-0"></div>
+            <div class="card border border-info col-12">
+                <br>
+                <table class="table mt-4 mb-4">
+                        
+                        <tr>           
+                            <th>Vehicle Number</th>
+                            <th>Vehicle Model</th>
+                            <th>Vehicle Type</th>
+                            <th>Vehicle Description</th>
+                            {%if request.user.role == 1 or request.user.role == 2 %}
+                            <th>Actions</th>
+                            {%endif%}
+                        </tr>  
+                        
+                {%for i in vehicle%}
+                
+                    <tr>         
+                        <td>{{i.vnumber}}</td>
+                        <td>{{i.vmodel}}</td>
+                        <td>{{i.vtype}}</td>
+                        <td>{{i.vdescription}}</td>
+                        <td>
+                            {%if request.user.role == 1 or request.user.role == 2 %}
+                            <a class="btn btn-sm btn-warning mt-2"  href="{%url 'vupdate' i.id%}">Edit</a>
+                            {%endif%}
+                            {%if request.user.role == 1%}
+                            <a class="btn btn-sm btn-danger mt-2" href="{%url 'vdelete' i.id%}">Delete</a>
+                            {%endif%}
+                        </td>
+                    </tr>
+                {%endfor%}
+            </table>
+            <br>
+            </div>
+            <div class="col-0"></div>
+        </div>
+</div>
+
+    
+{%endblock%}
