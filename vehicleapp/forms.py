@@ -2,6 +2,7 @@ from django import forms
 from vehicleapp.models import Vehicle,MyUser
 from django.contrib.auth.forms import UserCreationForm
 
+
 class RegistrationForm(UserCreationForm):
     
     password1=forms.CharField(widget=forms.PasswordInput(attrs={"class":"form-control border border-primary ","placeholder":"enter password"}))  
@@ -27,9 +28,9 @@ class VehicleForm(forms.ModelForm):
     class Meta:
         model=Vehicle
         fields=["vnumber",'vtype','vmodel',"vdescription"]
-
+        
         widgets={
-            "vnumber":forms.TextInput(attrs={"class":"form-control","placeholder":"enter vehicle number"}),
+            "vnumber":forms.TextInput(attrs={"class":"form-control",'pattern':'[A-Za-z0-9]+','title':'Enter Alphanumeric Characters Only A-Z,a-z,0-9 ',"placeholder":"enter vehicle number"}),
             "vmodel":forms.TextInput(attrs={"class":"form-control","placeholder":"enter vehicle model"}),
             "vdescription":forms.TextInput(attrs={"class":"form-control","placeholder":"enter vehicle description"}),
             "vtype":forms.Select(attrs={"class":"form-select form-control"})

@@ -21,7 +21,7 @@ def signin_required(fn):
     return wrapper
 
 def superadmin_required(user):
-    return user.is_authenticated and user.role in (1)
+    return user.is_authenticated and user.role in (1,)
 
 def admin_or_superadmin_required(user):
     return user.is_authenticated and user.role in (1,2)
@@ -81,6 +81,7 @@ class VehicleUpdateView(UpdateView):
     template_name="vupdate.html"
     pk_url_kwarg='id'
     success_url=reverse_lazy("home")    
+
 
 @method_decorator(aces,name="dispatch")
 class VehicleDeleteView(View):

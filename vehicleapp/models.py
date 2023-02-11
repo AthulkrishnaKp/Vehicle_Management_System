@@ -14,14 +14,17 @@ class MyUser(AbstractUser):
 
 
 class Vehicle(models.Model):
-    alphanumeric=RegexValidator(r'^[0-9a-zA-Z]*$','Only use alphanumeric characters')
-
+    
+    
     VEHICLE_TYPE=(
         ('two wheeler','Two Wheeler'),
         ('three wheeler','Three Wheeler'),
         ('four wheeler','Four Wheeler')
     )
     
+    alphanumeric=RegexValidator(r"^[0-9a-zA-Z_]*$",'Only use alphanumeric characters')
+    
+
     user=models.ForeignKey(MyUser,on_delete=models.CASCADE)
     vnumber=models.CharField(max_length=50,validators=[alphanumeric])
     vtype=models.CharField(choices=VEHICLE_TYPE,default='Two Wheeler',max_length=50)
